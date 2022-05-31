@@ -11,9 +11,10 @@ import {
 import { Status } from "../utils/Status";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { AirbnbRating } from "react-native-ratings";
-export default function ListCall() {
+export default function ListCall({navigation}) {
   const data = [
     {
+      id:0,
       date: new Date().toLocaleDateString(),
       title: "teste",
       desc: "descrição",
@@ -22,6 +23,7 @@ export default function ListCall() {
       statusColor: Status.StatusColor.finished,
     },
     {
+      id:1,
       date: new Date().toLocaleDateString(),
       title: "teste",
       desc: "descrição",
@@ -36,8 +38,12 @@ export default function ListCall() {
       <Text style={styles.title}>Histórico de chamados</Text>
       <FlatList
         data={data}
-        renderItem={({ item, index }) => (
-          <View key={index} style={[styles.card, styles.shadowProp]}>
+        renderItem={({ item }) => (
+          <TouchableOpacity key={item.id} style={[styles.card, styles.shadowProp]} 
+            onPress={() => navigation.navigate('Details-Call', {
+              ...item 
+            }) }
+          >
             <View style={styles.row}>
               <Text style={styles.cardTitle}>{item.title}</Text>
               {(item.status == Status.StatusLabels.finished &&
@@ -76,7 +82,7 @@ export default function ListCall() {
               reviewSize={0}
               reviews={[]}
             />
-          </View>
+          </TouchableOpacity>
         )}
       />
       <Modal

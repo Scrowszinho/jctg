@@ -4,6 +4,7 @@ import Call from './screens/Call';
 import ListCall from './screens/ListCall';
 import Home from './screens/Home';
 import Login from './screens/Login';
+import CallDetails from './screens/CallDetails';
 
 export default function Routes(){
     const Stack = createNativeStackNavigator();
@@ -35,6 +36,10 @@ export default function Routes(){
                 title: 'Histórico de chamados',
             }}
             component={ListCall} />
+            <Stack.Screen 
+            name='Details-Call'
+            options={{headerShown: false}}
+            component={CallDetails} />
         </Stack.Navigator>
     );
 }
